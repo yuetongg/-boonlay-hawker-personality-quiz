@@ -32,7 +32,6 @@ export const ResultCard: React.FC<ResultCardProps> = ({
 
       {/* Result Info */}
       <div className="space-y-2 text-center">
-        <div className="text-5xl">{result.emoji}</div>
         <h1 className="text-3xl font-bold text-gray-900">{result.name}</h1>
         <p className="text-lg text-gray-600">{result.description}</p>
       </div>

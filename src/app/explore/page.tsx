@@ -20,7 +20,7 @@ export default function ExplorePage() {
             Explore All Personalities
           </h1>
           <p className="text-lg text-gray-600">
-            Discover all 12 hawker centre personalities (click to expand)
+            Discover all 12 hawker centre personalities
           </p>
         </div>
 
@@ -44,7 +44,6 @@ export default function ExplorePage() {
 
               {/* Info */}
               <div className="space-y-2 text-center">
-                <div className="text-3xl">{personality.emoji}</div>
                 <h3 className="font-bold text-gray-900">{personality.name}</h3>
                 <p className="text-sm text-gray-600">{personality.description}</p>
               </div>
@@ -90,11 +89,11 @@ export default function ExplorePage() {
           onClick={() => setSelectedDish(null)}
         >
           <div
-            className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
-            <div className="sticky top-0 flex justify-end p-4 bg-white border-b">
+            <div className="flex justify-end p-4 bg-white border-b flex-shrink-0">
               <button
                 onClick={() => setSelectedDish(null)}
                 className="text-gray-500 hover:text-gray-700 text-2xl font-bold"
@@ -104,10 +103,10 @@ export default function ExplorePage() {
               </button>
             </div>
 
-            {/* Modal Content */}
-            <div className="p-8 space-y-6">
-              {/* Large Image */}
-              <div className="relative w-full overflow-hidden rounded-lg bg-gray-100" style={{ height: '500px' }}>
+            {/* Modal Content - Scrollable */}
+            <div className="overflow-y-auto flex-1 p-8 space-y-6">
+              {/* Large Image - Constrained Height */}
+              <div className="relative w-full bg-gray-100 rounded-lg overflow-hidden" style={{ height: '350px' }}>
                 <Image
                   src={selectedDish.image}
                   alt={selectedDish.name}
@@ -119,7 +118,6 @@ export default function ExplorePage() {
 
               {/* Info */}
               <div className="space-y-3 text-center">
-                <div className="text-6xl">{selectedDish.emoji}</div>
                 <h2 className="text-3xl font-bold text-gray-900">{selectedDish.name}</h2>
                 <p className="text-lg text-gray-600">{selectedDish.description}</p>
               </div>
