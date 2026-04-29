@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '@/components/common/Container';
@@ -10,6 +10,13 @@ import { PersonalityResult } from '@/lib/types';
 
 export default function ExplorePage() {
   const [selectedDish, setSelectedDish] = useState<PersonalityResult | null>(null);
+  const [resultUrl, setResultUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Get stored result URL from session storage
+    const stored = sessionStorage.getItem('resultUrl');
+    setResultUrl(stored);
+  }, []);
 
   return (
     <Container className="py-8">
@@ -33,13 +40,13 @@ export default function ExplorePage() {
               className="rounded-lg bg-white border-2 border-gray-100 p-6 hover:border-orange-300 hover:shadow-lg transition-all cursor-pointer text-left"
             >
               {/* Image */}
-              <div className="relative h-56 w-full mb-4 rounded-lg bg-gray-100 overflow-hidden">
+          <div className="w-full mb-4 flex justify-center">
                 <Image
                   src={personality.image}
                   alt={personality.name}
-                  fill
-                  className="object-contain p-2"
-                />
+                  width={300}
+    height={420} // adjust to your card ratio
+          className="h-auto w-auto max-h-80 object-contain"                />
               </div>
 
               {/* Info */}
@@ -69,7 +76,7 @@ export default function ExplorePage() {
 
         {/* Navigation */}
         <div className="flex gap-3 justify-center pt-8">
-          <Link href="/result">
+          <Link href={resultUrl || '/result'}>
             <Button variant="outline">
               Back to Result
             </Button>
@@ -106,32 +113,23 @@ export default function ExplorePage() {
             {/* Modal Content - Scrollable */}
             <div className="overflow-y-auto flex-1 p-8 space-y-6">
               {/* Large Image - Constrained Height */}
-              <div className="relative w-full bg-gray-100 rounded-lg overflow-hidden" style={{ height: '350px' }}>
+              <div className="relative w-full bg-gray-100 rounded-lg overflow-hidden" >
                 <Image
                   src={selectedDish.image}
                   alt={selectedDish.name}
-                  fill
+                  width={600}
+                  height={700} 
+      
                   className="object-contain p-4"
                   priority
                 />
               </div>
 
               {/* Info */}
-              <div className="space-y-3 text-center">
-                <h2 className="text-3xl font-bold text-gray-900">{selectedDish.name}</h2>
-                <p className="text-lg text-gray-600">{selectedDish.description}</p>
-              </div>
-
-              {/* Close Button */}
-              <div className="flex justify-center pt-4">
-                <Button
-                  onClick={() => setSelectedDish(null)}
-                  variant="secondary"
-                  size="lg"
-                >
-                  Close
-                </Button>
-              </div>
+              <div className="space-y-2 text-center">
+                <h2 className="text-2xl font-semibold text-gray-800">{selectedDish.name}</h2>
+                <p className="text-base text-gray-500">{selectedDish.description}</p>
+              </div>              
             </div>
           </div>
         </div>

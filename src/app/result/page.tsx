@@ -50,10 +50,6 @@ function ResultContent() {
     );
   }
 
-  const handleRestart = () => {
-    router.push('/');
-  };
-
   return (
     <Container className="py-8">
       <div className="space-y-8">
@@ -67,7 +63,6 @@ function ResultContent() {
         {/* Result Card */}
         <ResultCard
           result={result}
-          onRestart={handleRestart}
           onExplore="/explore"
         />
 
