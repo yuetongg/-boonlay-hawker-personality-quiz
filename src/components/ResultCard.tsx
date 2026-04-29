@@ -47,7 +47,7 @@ export const ResultCard: React.FC<ResultCardProps> = ({
   return (
     <div className="space-y-6">
       {/* Dish Image */}
-      <div className="relative w-full overflow-hidden rounded-lg bg-gray-100" style={{ height: '600px' }}>
+      <div className="relative w-full overflow-hidden rounded-lg" style={{ height: 'auto', minHeight: '500px', maxHeight: '700px' }}>
         <Image
           src={result.image}
           alt={result.name}

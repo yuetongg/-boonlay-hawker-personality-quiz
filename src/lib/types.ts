@@ -29,7 +29,7 @@ export interface QuizScore {
 export interface PersonalityResult {
   traits: string;
   name: string;
-  emoji: string;
+  emoji?: string;
   description: string;
   image: string;
   primaryTrait: string;
