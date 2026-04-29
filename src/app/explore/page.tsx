@@ -28,7 +28,7 @@ export default function ExplorePage() {
               className="rounded-lg bg-white border-2 border-gray-100 p-6 hover:border-orange-300 transition-colors"
             >
               {/* Image */}
-              <div className="relative h-40 w-full mb-4 rounded-lg bg-gray-100 overflow-hidden">
+              <div className="relative h-56 w-full mb-4 rounded-lg bg-gray-100 overflow-hidden">
                 <Image
                   src={personality.image}
                   alt={personality.name}
@@ -52,7 +52,7 @@ export default function ExplorePage() {
           <h2 className="text-2xl font-bold text-gray-900 text-center">
             The Boonlay Hawker Collection
           </h2>
-          <div className="relative h-96 w-full rounded-lg bg-gray-100 overflow-hidden">
+          <div className="relative w-full overflow-hidden rounded-lg bg-gray-100" style={{ height: '500px' }}>
             <Image
               src="/assets/mastercopy.png"
               alt="Boonlay Hawker Mastercopy"
