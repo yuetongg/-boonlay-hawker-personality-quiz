@@ -54,33 +54,6 @@ function ResultContent() {
     router.push('/');
   };
 
-  const handleShare = async () => {
-    const text = `I got "${result.name}" on the Boonlay Hawker Personality Quiz! ${result.emoji}\n\n${result.description}`;
-
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'Boonlay Hawker Personality Quiz',
-          text: text,
-          url: window.location.href,
-        });
-      } catch (err) {
-        console.error('Share failed:', err);
-        // Fallback: copy to clipboard
-        copyToClipboard(text);
-      }
-    } else {
-      // Fallback: copy to clipboard
-      copyToClipboard(text);
-    }
-  };
-
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text).then(() => {
-      alert('Result copied to clipboard!');
-    });
-  };
-
   return (
     <Container className="py-8">
       <div className="space-y-8">
@@ -94,9 +67,8 @@ function ResultContent() {
         {/* Result Card */}
         <ResultCard
           result={result}
-          scores={scores}
           onRestart={handleRestart}
-          onShare={handleShare}
+          onExplore="/explore"
         />
 
         {/* Back to Home */}

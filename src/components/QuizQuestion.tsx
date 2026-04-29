@@ -7,13 +7,25 @@ interface QuizQuestionProps {
   question: Question;
   selectedAnswer?: string;
   onAnswerSelect: (answer: string) => void;
+  onAutoAdvance?: () => void;
 }
 
 export const QuizQuestion: React.FC<QuizQuestionProps> = ({
   question,
   selectedAnswer,
   onAnswerSelect,
+  onAutoAdvance,
 }) => {
+  const handleSelect = (label: string) => {
+    onAnswerSelect(label);
+    // Auto-advance after a short delay
+    if (onAutoAdvance) {
+      setTimeout(() => {
+        onAutoAdvance();
+      }, 300);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-gray-900">{question.question}</h2>
@@ -22,7 +34,7 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({
         {question.options.map((option) => (
           <button
             key={option.label}
-            onClick={() => onAnswerSelect(option.label)}
+            onClick={() => handleSelect(option.label)}
             className={`w-full rounded-lg border-2 p-4 text-left transition-all duration-200 ${
               selectedAnswer === option.label
                 ? 'border-orange-600 bg-orange-50'

@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Container } from '@/components/common/Container';
 import { QuizQuestion } from '@/components/QuizQuestion';
 import { QuizProgress } from '@/components/QuizProgress';
-import { Button } from '@/components/common/Button';
 import { useQuizState } from '@/hooks/useQuizState';
 import { questions } from '@/lib/quizData';
 import { calculateScores, getTopTwoTraits } from '@/lib/scoring';
@@ -52,16 +51,9 @@ function QuizContent() {
     }
   };
 
-  const handlePrevious = () => {
-    quizState.previousQuestion();
-  };
-
   const handleAnswer = (answer: string) => {
     quizState.setAnswer(currentQuestion.id, answer);
   };
-
-  const isAnswerSelected = quizState.isAnswered(currentQuestion.id);
-  const isLastQuestion = quizState.currentQuestion === questions.length;
 
   return (
     <Container className="py-8">
@@ -77,45 +69,8 @@ function QuizContent() {
           question={currentQuestion}
           selectedAnswer={quizState.answers[currentQuestion.id]}
           onAnswerSelect={handleAnswer}
+          onAutoAdvance={handleNext}
         />
-
-        {/* Navigation Buttons */}
-        <div className="flex gap-3">
-          <Button
-            onClick={handlePrevious}
-            variant="outline"
-            disabled={quizState.currentQuestion === 1}
-            className="flex-1"
-          >
-            Previous
-          </Button>
-          <Button
-            onClick={handleNext}
-            disabled={!isAnswerSelected}
-            className="flex-1"
-          >
-            {isLastQuestion ? 'See Result' : 'Next'}
-          </Button>
-        </div>
-
-        {/* Question Indicators */}
-        <div className="flex flex-wrap gap-2 justify-center">
-          {questions.map((q) => (
-            <button
-              key={q.id}
-              onClick={() => quizState.goToQuestion(q.id)}
-              className={`h-10 w-10 rounded-lg font-semibold transition-colors ${
-                q.id === quizState.currentQuestion
-                  ? 'bg-orange-600 text-white'
-                  : quizState.isAnswered(q.id)
-                    ? 'bg-green-100 text-green-700 hover:bg-green-200'
-                    : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
-              }`}
-            >
-              {q.id}
-            </button>
-          ))}
-        </div>
       </div>
     </Container>
   );
