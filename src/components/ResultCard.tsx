@@ -52,7 +52,7 @@ export const ResultCard: React.FC<ResultCardProps> = ({
           src={result.image}
           alt={result.name}
           fill
-          className="object-contain p-4"
+          className="object-contain"
           priority
         />
       </div>
