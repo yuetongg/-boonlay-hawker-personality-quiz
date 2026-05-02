@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -23,6 +24,7 @@ export default function RootLayout({
         <main className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
           {children}
         </main>
+        <Analytics />
       </body>
     </html>
   );
